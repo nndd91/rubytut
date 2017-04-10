@@ -1,3 +1,14 @@
+=begin
+Link to Post:
+https://www.reddit.com/r/dailyprogrammer/comments/pjbj8/easy_challenge_2/
+
+Problem:
+Hello, coders! An important part of programming is being able to apply your programs, so your challenge for today is to create a calculator application that has use in your life. It might be an interest calculator, or it might be something that you can use in the classroom. For example, if you were in physics class, you might want to make a F = M * A calc.
+EXTRA CREDIT: make the calculator have multiple functions! Not only should it be able to calculate F = M * A, but also A = F/M, and M = F/A!
+
+=end
+
+#Solution Start
 def moreinfo (var1, var2, var3)
   print "Input value of #{var1}: "
   var1in = gets.to_f
