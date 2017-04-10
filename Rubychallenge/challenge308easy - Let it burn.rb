@@ -11,7 +11,7 @@ class House
     @layout
   end
 
-  def print_layout
+  def print_layout #Method to print the room layout
     for i in 0..(@layout.length-1)
       for j in 0..(@layout[i].length-1)
         print @layout[i][j]
@@ -20,7 +20,57 @@ class House
     end
   end
 
-  def smoke(x, y)
+  def check_surr(x, y) #Method to check surrounding for smoke
+
+    surr_array = [[x-1,y], [x+1,y], [x, y-1], [x, y+1]] #Coordinates to check
+
+    for i in 0..3
+      a = surr_array[i][0]
+      b = surr_array[i][1]
+      if @layout[a][b] == "S"
+        @layout[a][b] = "F"
+        print "Changing  (" + (a).to_s + ", " + (b).to_s + ") to F\n"
+        check_surr(a,b)
+      else
+      end
+    end
+  end
+
+  def check_door(x, y, fireOrSmoke) #Method to check for door
+
+    surr_array = [[x-1,y,-1, 0], [x+1,y, 1, 0], [x, y-1, 0, -1], [x, y+1, 0, 1]] #Coordinates to check
+    print "Checking Door\n"
+    for i in 0..3
+      a = surr_array[i][0]
+      b = surr_array[i][1]
+      c = surr_array[i][2]
+      d = surr_array[i][3]
+
+      if @layout[a][b] == "/" || @layout[a][b] == "=" || @layout[a][b] == "_"
+        print "Door found\n"
+
+        if @layout[a+c][b+d] == "F" && fireOrSmoke == "F"
+          print "Fire found at coordinate (" + (a+c).to_s + ", " + (b+d).to_s + ")\n"
+          @layout[x][y] = "F"
+          print "Changing  (" + (x).to_s + ", " + (y).to_s + ") to F\n"
+          check_surr(a,b)
+
+        elsif @layout[a+c][b+d] == "S" && fireOrSmoke == "S"
+          print "Smoke found at coordinate (" + (a+c).to_s + ", " + (b+d).to_s + ")\n"
+          @layout[a+c][b+d] = "F"
+          print "Changing  (" + (a+c).to_s + ", " + (b+d).to_s + ") to F\n"
+          check_surr(a+c,b+d)
+
+        end
+
+
+
+      end
+    end
+  end
+
+
+  def smoke(x, y) #Method to check location and place smoke
     x = x.to_i
     y = y.to_i
 
@@ -31,10 +81,20 @@ class House
     case curr_sit
     when "S"
       @layout[x][y] = "F"
+      check_surr(x, y)
+      check_door(x, y, "S")
       print_layout
       input_smoke
     when " "
       @layout[x][y] = "S"
+
+      if @layout[x-1][y] == "F" || @layout[x+1][y] == "F" || @layout[x][y-1] == "F" || @layout[x][y+1] == "F"
+        @layout[x][y] = "F"
+        check_surr(x, y)
+      end
+
+      check_door(x, y, "F")
+
       print_layout
       input_smoke
     when "F"
@@ -52,8 +112,10 @@ class House
   end
 
   def input_smoke
-    x = gets.chomp
-    y = gets.chomp
+    input = gets.chomp.split
+    x = input[0]
+    y = input[1]
+
 
     puts "You chose (#{x},#{y})"
 
