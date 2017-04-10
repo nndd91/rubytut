@@ -20,18 +20,24 @@ class House
     end
   end
 
-  def check_surr(x, y) #Method to check surrounding for smoke
+  def check_surr(x, y, fireOrSmoke) #Method to check surrounding for smoke
 
     surr_array = [[x-1,y], [x+1,y], [x, y-1], [x, y+1]] #Coordinates to check
 
     for i in 0..3
       a = surr_array[i][0]
       b = surr_array[i][1]
-      if @layout[a][b] == "S"
+      if @layout[a][b] == "S" && fireOrSmoke == "S"
+        print "Smoke found at coordinate (" + (a).to_s + ", " + (b).to_s + ")\n"
         @layout[a][b] = "F"
-        print "Changing  (" + (a).to_s + ", " + (b).to_s + ") to F\n"
-        check_surr(a,b)
-      else
+        print "Smoke at (" + (a).to_s + ", " + (b).to_s + ") becomes Fire\n"
+        check_surr(a,b,"S")
+      elsif @layout[a][b] == "F" && fireOrSmoke == "F"
+        print "Fire found at coordinate (" + (a).to_s + ", " + (b).to_s + ")\n"
+        @layout[x][y] = "F"
+        print "Smoke at (" + (x).to_s + ", " + (y).to_s + ") becomes Fire\n"
+        check_surr(x,y,"S")
+
       end
     end
   end
@@ -47,24 +53,21 @@ class House
       d = surr_array[i][3]
 
       if @layout[a][b] == "/" || @layout[a][b] == "=" || @layout[a][b] == "_"
-        print "Door found\n"
+        print "Connection found (Either door, broken wall, or window)\n"
 
         if @layout[a+c][b+d] == "F" && fireOrSmoke == "F"
           print "Fire found at coordinate (" + (a+c).to_s + ", " + (b+d).to_s + ")\n"
           @layout[x][y] = "F"
-          print "Changing  (" + (x).to_s + ", " + (y).to_s + ") to F\n"
-          check_surr(a,b)
+          print "Smoke at (" + (x).to_s + ", " + (y).to_s + ") becomes Fire\n"
+          check_surr(a,b,"S")
 
         elsif @layout[a+c][b+d] == "S" && fireOrSmoke == "S"
           print "Smoke found at coordinate (" + (a+c).to_s + ", " + (b+d).to_s + ")\n"
           @layout[a+c][b+d] = "F"
-          print "Changing  (" + (a+c).to_s + ", " + (b+d).to_s + ") to F\n"
-          check_surr(a+c,b+d)
+          print "Smoke at (" + (a+c).to_s + ", " + (b+d).to_s + ") becomes Fire\n"
+          check_surr(a+c,b+d, "S")
 
         end
-
-
-
       end
     end
   end
@@ -75,26 +78,19 @@ class House
     y = y.to_i
 
     curr_sit = @layout[x][y].chomp
-    p curr_sit
-    puts "Current location: < #{curr_sit} >"
+    puts "Current location situation: < #{curr_sit} >"
 
     case curr_sit
     when "S"
       @layout[x][y] = "F"
-      check_surr(x, y)
+      check_surr(x, y, "S")
       check_door(x, y, "S")
       print_layout
       input_smoke
     when " "
       @layout[x][y] = "S"
-
-      if @layout[x-1][y] == "F" || @layout[x+1][y] == "F" || @layout[x][y-1] == "F" || @layout[x][y+1] == "F"
-        @layout[x][y] = "F"
-        check_surr(x, y)
-      end
-
+      check_surr(x, y, "F")
       check_door(x, y, "F")
-
       print_layout
       input_smoke
     when "F"
@@ -121,14 +117,10 @@ class House
 
     smoke(x, y)
 
-
   end
-
-
 end
 
 #initializing
-
 firehouse = House.new
 firehouse.layout= ["#############/#".chars,
               "#     |       #".chars,
