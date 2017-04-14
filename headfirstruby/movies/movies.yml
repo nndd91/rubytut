@@ -1,0 +1,26 @@
+---
+1: !ruby/object:Movie
+  title: fdsfd
+  director: dsa
+  year: dd
+  id: 1
+2: !ruby/object:Movie
+  title: ad
+  director: da
+  year: asd
+  id: 2
+3: !ruby/object:Movie
+  title: dsa
+  director: dsa
+  year: das
+  id: 3
+4: !ruby/object:Movie
+  title: dsa
+  director: '123'
+  year: '421'
+  id: 4
+5: !ruby/object:Movie
+  title: Alien
+  director: Alien Director
+  year: '1999'
+  id: 5
