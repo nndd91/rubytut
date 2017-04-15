@@ -7,17 +7,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "$debug = true\n\nclass Entry\n#Class Methods\n  @@database = Array.new #Array to hold all entries\n  attr_accessor :record, :date, :shortdes, :longdes, :amount, :currency, :con_amount\n\n  def initialize\n    @record = @@database.length.to_s\n    @date = \"01/01/2017\"\n    @shortdes = \"shortdes\"\n    @longdes = \"longdes\"\n    @amount = \"$0.00\"\n    @currency = \"SGD\"\n    @con_amount = \"$0.00\"\n    #@@database << self\n  end\n\n  def self.all_instances #Return all entry\n    @@database\n\n    if $debug == true\n      puts \"Debug: #{@@database} \\n\"\n    end\n\n  end\n\n\n  def self.userinput(type) #Menu for allowing user input\n    clearscreen\n    type = type.to_i\n    array = Array.new\n    c = @@database.length.to_i\n    b = @@database\n\n    puts \"c is: \" + c.to_s\n    b.push(Entry.new)\n\n    if type == 1 #Command Line\n\n      puts \"Enter data in the following format\"\n      puts \"<date>, <shortdes>, <longdes>, <amount>, <currency>, <con_amount>\"\n\n      input = gets.chomp\n      p input\n      array = input.split(',')\n      p array\n\n\n\n    elsif type == 2 #Guide\n      guide = [[\"Date\", b[c].date], [\"Short Description\", b[c].shortdes], [\"Long Description\", b[c].longdes], [\"Amount\",b[c].amount], [\"Currency\", b[c].currency]]\n      p guide[0][1]\n      for i in 0..4\n        puts \"Please enter #{guide[i][0]} (Leave blank for default[#{(guide[i][1])}]): \"\n        input = gets.chomp.to_s\n        array.push(input)\n      end\n      p array\n\n    end\n\n\n\n    if $debug ==true\n      puts \"New entry created with content: \"\n      p b[c]\n    end\n    b[c].date = array[0]\n    b[c].shortdes = array[1]\n    b[c].longdes = array[2]\n    b[c].amount = array[3]\n\n    puts \"Updated entry with content: \"\n    p b[c]\n\n  end\n\n  def self.print_all_entry\n    clearscreen\n    print \"All Entries are as follows: \\n\\n\"\n    for i in 0..(@@database.length-1)\n      print @@database[i].record + \" | \" + @@database[i].date + \" | \" + @@database[i].shortdes + \" | \" + @@database[i].longdes + \" | \" + @@database[i].amount + \" | \" + @@database[i].currency + \" | \" + @@database[i].con_amount + \" | \"\n      print \"\\n\"\n    end\n    print \"\\n\"\n  end\n\n\n#Instance Method\n\n  def print_entry\n    print @date\n    print \" | \"\n    print @shortdes\n    print \" | \"\n    print @longdes\n    print \" | \"\n    print @amount\n    print \" | \"\n    print @currency\n    print \" | \"\n    print @con_amount\n    print \" | \"\n  end\nend # End of Class\n\n#Utilities Methods\n\ndef clearscreen\n  system('cls')\nend\n\ndef menu\n\nclearscreen\n\n  print <<EOF\n  Hello there! Welcome to this budget tracker!\n  What would you like to do today?\n\n    1. New Entry\n    2. New Entry(Guided)\n    3. View all Entry\nEOF\n\n  input = gets.chomp.to_i\n\n  case input\n  when 1 #New Entry\n    Entry.userinput(1)\n\n    puts \"Input 1 to go back\"\n    input = gets.chomp.to_i\n    if input == 1\n      menu\n    else\n      exit\n    end\n  when 2 #Guide Entry\n    Entry.userinput(2)\n\n    puts \"Input 1 to go back\"\n    input = gets.chomp.to_i\n    if input == 1\n      menu\n    else\n      exit\n    end\n  when 3 # View all Entry\n    Entry.print_all_entry\n    puts \"Input 1 to go back\"\n    input = gets.chomp.to_i\n    if input == 1\n      menu\n    else\n      exit\n    end\n\n  end\n\nend\n\ndef main #Main Program Start\n\n\n  entry00000001 = Entry.new\n  #entry00000001.inputentry\n  entry00000002 = Entry.new\n  entry00000003 = Entry.new\n  entry00000004 = Entry.new\n  #entry00000002.inputentry\n\n\n\n  p entry00000001.date = \"03/03/1991\"\n\n  entry00000001.print_entry\n  print \"\\n\"\n  entry00000002.print_entry\n  print \"\\n\"\n\n  Entry.all_instances\n  Entry.print_all_entry\n\n  menu\n  Entry.userinput\n\n\n\n\n\n\nend\n\nmain\n",
-			"file": "/home/nathan/Programming/budgettracker/lib/record.rb",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 3560,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -85,13 +74,11 @@
 	},
 	"expanded_folders":
 	[
-		"/home/nathan/Programming/rubytut/headfirstruby",
-		"/home/nathan/Programming/rubytut/headfirstruby/movies",
-		"/home/nathan/Programming/rubytut/headfirstruby/movies/lib",
-		"/home/nathan/Programming/rubytut/headfirstruby/movies/views"
+		"/home/nathan/Programming/rubytut"
 	],
 	"file_history":
 	[
+		"/home/nathan/Programming/budgettracker/lib/record.rb",
 		"/home/nathan/Programming/rubytut/budgettracker.rb",
 		"/home/nathan/Programming/rubytut/headfirstruby/movies/app.rb",
 		"/home/nathan/Programming/rubytut/headfirstruby/movies/movies.yml",
@@ -164,39 +151,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/home/nathan/Programming/budgettracker/lib/record.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3560,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3560,
-								3560
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -240,7 +196,7 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "Packages/Ruby/Ruby.sublime-build",
-	"project": "headfirst.sublime-project",
+	"project": "rubytut.sublime-project",
 	"replace":
 	{
 		"height": 0.0
