@@ -34,3 +34,16 @@ kidslist.each_cons(numofkids+1) do |kidsgroup|
   puts "#{kidsgroup[0]} > #{restofkids[0]}, #{restofkids[1]}, #{restofkids[2]}"
 
 end
+
+=begin
+#Input
+Rebbeca Gann;Latosha Caraveo;Jim Bench;Carmelina Biles;Oda Wilhite;Arletha Eason
+3
+#Output
+Arletha Eason > Oda Wilhite, Rebbeca Gann, Carmelina Biles
+Carmelina Biles > Oda Wilhite, Latosha Caraveo, Rebbeca Gann
+Oda Wilhite > Jim Bench, Rebbeca Gann, Latosha Caraveo
+Rebbeca Gann > Jim Bench, Latosha Caraveo, Arletha Eason
+Latosha Caraveo > Carmelina Biles, Arletha Eason, Jim Bench
+Jim Bench > Oda Wilhite, Arletha Eason, Carmelina Biles
+=end
