@@ -31,7 +31,11 @@ end
 
 kidslist.each_cons(numofkids+1) do |kidsgroup|
   restofkids = (kidsgroup.reject { |kid| kid == kidsgroup[0] }).shuffle
-  puts "#{kidsgroup[0]} > #{restofkids[0]}, #{restofkids[1]}, #{restofkids[2]}"
+  print "#{kidsgroup[0]} > "
+  for i in 0..numofkids-2
+    print "#{restofkids[i]}, "
+  end
+  puts "#{restofkids[numofkids-1]}"
 
 end
 
