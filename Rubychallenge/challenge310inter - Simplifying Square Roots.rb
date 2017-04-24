@@ -36,3 +36,30 @@ def simplify_sqrt(a, b)
 end
 
 simplify_sqrt(a, b)
+
+
+
+=begin
+def simplify_sqrt(outside, inside)
+  (2..inside ** 0.5).select { |n| inside % (n ** 2) == 0 }.each do |i|
+    inside /= i ** 2
+    outside *= i
+  end
+  [outside, inside]
+end
+
+def simplify_fraction(num, den)
+  g = num.gcd den
+  [num / g, den / g]
+end
+
+a, b, c, d = ARGV.map { |s| s.to_i }
+
+b *= d
+c *= d
+
+a, b = simplify_sqrt a, b
+a, c = simplify_fraction a, c
+
+puts a, b, c
+=end
