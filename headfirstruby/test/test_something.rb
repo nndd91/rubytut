@@ -17,22 +17,28 @@ class TestSomething < Minitest::Test
     assert(person.introduction == "Hello, my name is Bob!") # Test with what you want to see
   end
 
+  def setup
+    @list = ListWithCommas.new
+    puts "Setting up"
+  end
+
+  def teardown
+    puts "Test ended"
+  end
+
   def test_it_joins_two_words_with_and
-    list = ListWithCommas.new
-    list.items = ['apple', 'orange']
-    assert_equal('apple and orange', list.join) # assert_equal takes two arg and test if they are equal
+    @list.items = ['apple', 'orange']
+    assert_equal('apple and orange', @list.join) # assert_equal takes two arg and test if they are equal
   end
 
   def test_it_joins_three_words_with_commas
-    list = ListWithCommas.new
-    list.items = ['apple', 'orange', 'pear']
-    assert(list.join == 'apple, orange, and pear', "Return value didnt equal 'apple, orange, and pear'")#Write a message as second argument
+    @list.items = ['apple', 'orange', 'pear']
+    assert(@list.join == 'apple, orange, and pear', "Return value didnt equal 'apple, orange, and pear'")#Write a message as second argument
   end
 
   def test_it_prints_one_word_alone
-    list = ListWithCommas.new
-    list.items = ['apple']
-    assert_equal('apple', list.join) #first argument is what you want to test for
+    @list.items = ['apple']
+    assert_equal('apple', @list.join) #first argument is what you want to test for
   end
 
   def other_assertion_methods
