@@ -81,3 +81,35 @@ l33t_this("1 n33d m4 p1llz!")
 
 
 
+=begin
+$leet_dictionary = {
+    'A' => '4',
+    'B' => '6',
+    'E' => '3',
+    'L' => '1',
+    'I' => '|',
+    'M' => '(V)',
+    'N' => '(\)',
+    'O' => '0',
+    'S' => '5',
+    'T' => '7',
+    'V' => '\/',
+    'W' => '`//'
+}
+
+def muggle_to_leet(word)
+  $leet_dictionary.keys.each { |key| word.gsub!(key, $leet_dictionary[key]) }
+  word
+end
+
+def leet_to_muggle(word)
+  $leet_dictionary.values.each { |value| word.gsub!(value, $leet_dictionary.key(value)) }
+  word
+end
+
+def ez_leet(word)
+  word.upcase!
+  $leet_dictionary.values.each { |value| return leet_to_muggle(word) if word.include?(value.to_s) }
+  muggle_to_leet(word)
+end
+=end
