@@ -32,8 +32,10 @@ Chapter 10 - comparable and enumerators
 Chapter 12 - Exceptions
 1. small_oven.rb
 
-
-
-Chaper 13 - Minitest and the different assertion methods
+Chapter 13 - Minitest and the different assertion methods
 1. test/test_something.rb
 2. lib/person.rb
+
+Chapter 14, 15, 16 - Serving HTML, Sinatra, YAML
+1. hello_web.rb
+2. movies
