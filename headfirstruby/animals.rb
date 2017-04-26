@@ -2,16 +2,21 @@
 
 class Animals
 
-  attr_reader :name, :age
+  attr_reader :age
 
-  def name=(value)
+  def name=(value) #Attribute writer method
     if value == ""
-      raise "Name can't be blank!"
+      raise "Name can't be blank!" #Raise an error when the name is blank
     end
     @name = value
   end
 
-  def age=(value)
+  def name #Simple attribute reader method, also can use the attr_reader method.
+    @name
+  end
+
+
+  def age=(value) #
     if value < 0
       raise "An age of #{value} isnt valid!"
     end
@@ -28,7 +33,7 @@ class Animals
 
 end
 
-class Dog < Animals
+class Dog < Animals # Inherit all methods from Animal class
 
   def talk
     puts "#{@name} says Bark!"
@@ -43,6 +48,10 @@ class Dog < Animals
     puts "Stops for a moment and peed"
   end
 
+  def to_s #defining standard methods can override it
+    "#{@name} the dog, age #{age}"
+  end
+
 end
 
 dog = Dog.new
@@ -52,3 +61,4 @@ dog.report_age
 dog.talk
 dog.move("bed")
 dog.poop
+puts dog.to_s

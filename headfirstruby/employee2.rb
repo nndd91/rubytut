@@ -15,7 +15,7 @@ class Employee
 	end
 
 	def print_name
-		puts "Employee Name: #{name}"
+		puts "Employee Name: #{name}" #calls to self.name
 	end
 
 end
@@ -33,7 +33,7 @@ class SalariedEmployee < Employee
 	end
 
 	def initialize(name = "Annoymous", salary = 0.0)
-		super(name)
+		super(name) #include the name variable as defined in the Employee initialized method
 		self.salary = salary
 	end
 
@@ -76,12 +76,12 @@ class HourlyEmployee < Employee
 		puts "Pay this period: #{formatted_pay}"
 	end
 
-	def self.security_guard(name)
-		HourlyEmployee.new(name, 19.25, 30)
+	def self.security_guard(name) #include self. for class methods
+		HourlyEmployee.new(name, 19.25, 30) #Method collects only name and create new instance of HourlyEmployee with predefined values for other attributes.
 	end
 
 	def self.cashier(name)
-		HourlyEmployee.new(name, 12.75, 25)
+		HourlyEmployee.new(name, 12.75, 25) #Use predefined hourly_wage and hours_per_week for each employee type
 	end
 
 	def self.janitor(name)
