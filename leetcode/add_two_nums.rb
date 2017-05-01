@@ -32,9 +32,9 @@ class ListNode
 end
 
 def create_list(num)
-  puts "Creating List"
+  #puts "Creating List"
   array = num.to_s.reverse.chars
-  p array
+  #p array
   @l1 = ListNode.new(0)
   curr_l1 = @l1
   for i in (0..array.length-1)
@@ -44,7 +44,7 @@ def create_list(num)
       curr_l1 = curr_l1.next
     end
   end
-  p @l1
+  #p @l1
   return @l1
 end
 
@@ -82,7 +82,7 @@ def add_two_numbers(l1, l2)
       #puts "L1 is nil"
       curr_l3.val += curr_l2.val
       curr_l2 = curr_l2.next
-      if curr_l3.val <= 9
+      if curr_l3.val <= 9 && curr_l2 != nil
         curr_l3.next = ListNode.new(0)
         curr_l3 = curr_l3.next
       elsif curr_l3.val > 9
@@ -94,7 +94,7 @@ def add_two_numbers(l1, l2)
       #puts "L2 is nil"
       curr_l3.val += curr_l1.val
       curr_l1 = curr_l1.next
-      if curr_l3.val <= 9
+      if curr_l3.val <= 9 && curr_l1 != nil
         curr_l3.next = ListNode.new(0)
         curr_l3 = curr_l3.next
       elsif curr_l3.val > 9
@@ -113,10 +113,12 @@ def add_two_numbers(l1, l2)
       if curr_l3.val > 9
         curr_l3.val -= 10
         curr_l3.next = ListNode.new(1)
-      else
+        curr_l3 = curr_l3.next
+      elsif curr_l1 != nil || curr_l2 != nil
         curr_l3.next = ListNode.new(0)
+        curr_l3 = curr_l3.next
       end
-      curr_l3 = curr_l3.next
+
 
     end
   end
@@ -136,6 +138,7 @@ l1 = create_list(num1)
 l2 = create_list(num2)
 puts "Printing List: "
 printlist(l1)
+puts
 printlist(l2)
 =begin
 l1 = ListNode.new(9)

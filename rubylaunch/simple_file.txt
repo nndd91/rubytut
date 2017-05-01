@@ -1,0 +1,4 @@
+First line of file
+Hello there
+Using the double arrow <<
+Using the write command
